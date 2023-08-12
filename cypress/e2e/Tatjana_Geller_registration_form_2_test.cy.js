@@ -20,7 +20,7 @@ describe('Section 1: Functional tests', () => {
         cy.get('.submit_button').should('be.disabled')
         cy.get('#success_message').should('not.be.visible')
         cy.get('#password_error_message').should('have.css', 'display', 'block')
-    })
+    });
 
     it('User can use only same both first and validation passwords', () => {
         cy.get('#username').type('Something')
@@ -34,7 +34,7 @@ describe('Section 1: Functional tests', () => {
         cy.get('.submit_button').should('be.enabled')
         cy.get('#success_message').should('not.be.visible')
         cy.get('#password_error_message').should('have.css', 'display', 'none')
-    })
+    });
 
     //or we can use inputValidData instead of filling in all mandatory fields
     it('User can use only same both first and validation passwords', () => {
@@ -42,7 +42,7 @@ describe('Section 1: Functional tests', () => {
          cy.get('.submit_button').should('be.enabled')
          cy.get('#success_message').should('not.be.visible')
          cy.get('#password_error_message').should('have.css', 'display', 'none')
-     })
+     });
     
     it('User can submit form with all fields added', () => {
         cy.get('#username').type('Something')
@@ -62,7 +62,7 @@ describe('Section 1: Functional tests', () => {
         cy.get('.submit_button').click()
         cy.get('#success_message').should('be.visible')
         cy.get('#password_error_message').should('have.css', 'display', 'none')
-    })
+    });
 
     it('User can submit form with valid data and only mandatory fields added', () => {
         cy.get('#username').type('Something')
@@ -74,11 +74,11 @@ describe('Section 1: Functional tests', () => {
         cy.get('.submit_button').should('be.enabled')
         cy.get('.submit_button').click()
         cy.get('#success_message').should('be.visible')
-    })
+    });
 
     it('Input valid data to the page', () => {
         inputValidData('john.doe')
-    })
+    });
 
     it('the submit button is not enabled when some mandatory field is not present.', () => {//let's check if user name is not present
         //cy.get('#username').type('Something')
@@ -98,7 +98,7 @@ describe('Section 1: Functional tests', () => {
         //cy.get('.submit_button').click()
         cy.get('#success_message').should('not.be.visible')
         cy.get('#password_error_message').should('have.css', 'display', 'none')
-    })
+    });
 
     // Lets's check if first name is not present
     it('the submit button is not enabled when some mandatory field is not present.', () => {
@@ -119,9 +119,9 @@ describe('Section 1: Functional tests', () => {
         //cy.get('.submit_button').click()
         cy.get('#success_message').should('not.be.visible')
         cy.get('#password_error_message').should('have.css', 'display', 'none')
-    })
+    });
 
-})
+});
 
 /*
 Assignement 5: create more visual tests
@@ -134,7 +134,7 @@ describe('Section 2: Visual tests', () => {
         // get element and check its parameter height, to be equal 178
         cy.get('img').invoke('height').should('be.lessThan', 178)
             .and('be.greaterThan', 100)
-    })
+    });
 
 // Check second picture
 
@@ -144,7 +144,7 @@ describe('Section 2: Visual tests', () => {
         // get element and check its parameter height, to be equal 116
         cy.get('[src="cypress_logo.png"]').invoke('height').should('be.lessThan', 116)
             .and('be.greaterThan', 80)
-    })
+    });
 
 
     it('Check navigation part', () => {
@@ -164,7 +164,7 @@ describe('Section 2: Visual tests', () => {
         // Go back to previous page
         cy.go('back')
         cy.log('Back again in registration form 2')
-    })
+    });
 
     // Check second link to Cerebrum Hub homepage
     it('Check navigation part', () => {
@@ -184,7 +184,7 @@ describe('Section 2: Visual tests', () => {
         // Go back to previous page
         cy.go('back')
         cy.log('Back again in registration form 2')
-    })
+    });
 
     it('Check that radio button list is correct', () => {
         // Array of found elements with given selector has 4 elements in total
@@ -198,24 +198,22 @@ describe('Section 2: Visual tests', () => {
         cy.get('input[type="radio"]').eq(0).check().should('be.checked')
         cy.get('input[type="radio"]').eq(1).check().should('be.checked')
         cy.get('input[type="radio"]').eq(0).should('not.be.checked')
-    })
-
-})
+    });
 
 
-it('Check that checkbox button list is correct', () => {
-    // Array of found elements with given selector has 3 elements in total
-    cy.get('input[type="checkbox"]').should('have.length', 3)
-    cy.get('input[type="checkbox"]').next().eq(0).should('have.text', 'I have a bike').and('not.be.checked')
-    cy.get('input[type="checkbox"]').next().eq(1).should('have.text', 'I have a car').and('not.be.checked')
-    cy.get('input[type="checkbox"]').next().eq(2).should('have.text', 'I have a boat').and('not.be.checked')
+    it('Check that checkbox button list is correct', () => {
+        // Array of found elements with given selector has 3 elements in total
+        cy.get('input[type="checkbox"]').should('have.length', 3)
+        cy.get('input[type="checkbox"]').next().eq(0).should('have.text', 'I have a bike').and('not.be.checked')
+        cy.get('input[type="checkbox"]').next().eq(1).should('have.text', 'I have a car').and('not.be.checked')
+        cy.get('input[type="checkbox"]').next().eq(2).should('have.text', 'I have a boat').and('not.be.checked')
 
-    // Selecting one will remove selection from other radio button
-    cy.get('input[type="checkbox"]').eq(0).check().should('be.checked')
-    cy.get('input[type="checkbox"]').eq(1).check().should('be.checked')
-    cy.get('input[type="checkbox"]').eq(0).should('be.checked')
-    cy.get('input[type="checkbox"]').eq(1).should('be.checked')
-})
+        // Selecting one will remove selection from other radio button
+        cy.get('input[type="checkbox"]').eq(0).check().should('be.checked')
+        cy.get('input[type="checkbox"]').eq(1).check().should('be.checked')
+        cy.get('input[type="checkbox"]').eq(0).should('be.checked')
+        cy.get('input[type="checkbox"]').eq(1).should('be.checked')
+    });
 
     it('Car dropdown is correct', () => {
         // Here is an example how to explicitely create screenshot from the code
@@ -235,8 +233,8 @@ it('Check that checkbox button list is correct', () => {
         cy.get('#cars').find('option').then(options => {
             const actual = [...options].map(option => option.value)
             expect(actual).to.deep.eq(['volvo', 'saab', 'opel', 'audi'])
-        })
-    })
+        });
+    });
 
 
     // Create test similar to previous one
@@ -263,6 +261,7 @@ it('Check that checkbox button list is correct', () => {
             expect(actual).to.deep.eq(['dog', 'cat', 'snake', 'hippo', 'spider', 'mouse'])
         })
     })
+})
     
 
 
