@@ -5,16 +5,16 @@ beforeEach(() => {
 //BONUS TASK: add visual tests for registration form 3
 describe('Section 1: visual tests for registration form 3', () => {
     
-it('Check that cerebrum_hub_logo is correct and has correct size', () => {
-    cy.log('Will check cerebrum_hub_logo source and size')
-    cy.get('[src="cerebrum_hub_logo.png"]').should('have.attr', 'src').should('include', 'cerebrum_hub_logo')
-    // get element and check its parameter height, to be equal 178
-    cy.get('[src="cerebrum_hub_logo.png"]').invoke('height').should('be.lessThan', 178)
-        .and('be.greaterThan', 150)
-})
+    it('Check that cerebrum_hub_logo is correct and has correct size', () => {
+        cy.log('Will check cerebrum_hub_logo source and size')
+        cy.get('[src="cerebrum_hub_logo.png"]').should('have.attr', 'src').should('include', 'cerebrum_hub_logo')
+        // get element and check its parameter height, to be equal 178
+        cy.get('[src="cerebrum_hub_logo.png"]').invoke('height').should('be.lessThan', 178)
+            .and('be.greaterThan', 150)
+    });
 
 
-it('Check that radio button list is correct', () => {
+    it('Check that radio button list is correct', () => {
         // Array of found elements with given selector has 4 elements in total
         cy.get('input[type="radio"]').should('have.length', 4)
         cy.get('input[type="radio"]').next().eq(0).should('have.text', 'Daily').and('not.be.checked')
@@ -26,8 +26,8 @@ it('Check that radio button list is correct', () => {
         cy.get('input[type="radio"]').eq(0).check().should('be.checked')
         cy.get('input[type="radio"]').eq(1).check().should('be.checked')
         cy.get('input[type="radio"]').eq(0).should('not.be.checked')
-    
-    })
+        
+    });
 
 
     it('country dropdown is correct', () => {
@@ -37,62 +37,59 @@ it('Check that radio button list is correct', () => {
         cy.get('#country').find('option').then(options => {
             const actual = [...options].map(option => option.value)
             expect(actual).to.deep.eq(['','object:3', 'object:4', 'object:5'])
-        })
-    })
+        });
+    });
 
     it('the list of cities is not displayed before selecting a country', () => {
         cy.get('#country').eq('') //country is not selected 
         cy.get('#city').should('be.disabled')
         
-    })
+    });
 
     it('Spain contains list of cities', () => {
         cy.get('#country').select('Spain')
         cy.get('#city').find('option').then(options => {
             const actual = [...options].map(option => option.value)
             expect(actual).to.deep.eq(['','string:Malaga', 'string:Madrid', 'string:Valencia','string:Corralejo'])
-        })
-    })
+        });
+    });
 
-        it('Estonia contains list of cities', () => {
-            cy.get('#country').select('Estonia')
-            cy.get('#city').find('option').then(options => {
-                const actual = [...options].map(option => option.value)
-                expect(actual).to.deep.eq(['','string:Tallinn', 'string:Haapsalu', 'string:Tartu'])
-            })
-        })
+    it('Estonia contains list of cities', () => {
+        cy.get('#country').select('Estonia')
+        cy.get('#city').find('option').then(options => {
+            const actual = [...options].map(option => option.value)
+            expect(actual).to.deep.eq(['','string:Tallinn', 'string:Haapsalu', 'string:Tartu'])
+        });
+    });
 
-            it('Austria contains list of cities', () => {
-                cy.get('#country').select('Austria')
-                cy.get('#city').find('option').then(options => {
-                    const actual = [...options].map(option => option.value)
-                    expect(actual).to.deep.eq(['', 'string:Vienna', 'string:Salzburg', 'string:Innsbruck'])
-                })
-            })
+    it('Austria contains list of cities', () => {
+        cy.get('#country').select('Austria')
+        cy.get('#city').find('option').then(options => {
+            const actual = [...options].map(option => option.value)
+            expect(actual).to.deep.eq(['', 'string:Vienna', 'string:Salzburg', 'string:Innsbruck'])
+        });
+    });
 
-            it('Check that checkbox button list is correct', () => {
-                // Array of found elements with given selector has 3 elements in total
-                cy.get('input[type="checkbox"][ng-model="checkbox"]').should('have.class', 'ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required').check()
-               // cy.get('input[type="checkbox"][ng-model="checkbox"]').check()
-                cy.get('input[type="checkbox"]').check()
-                cy.get('button').should('have.text', 'Accept our cookie policy')
-                cy.get('button a').should('be.visible').click()
-                cy.url().should('contain','/cookiePolicy.html')
+    it('Check that checkbox button list is correct', () => {
+        // Array of found elements with given selector has 3 elements in total
+        cy.get('input[type="checkbox"][ng-model="checkbox"]').should('have.class', 'ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required').check()
+        // cy.get('input[type="checkbox"][ng-model="checkbox"]').check()
+        cy.get('input[type="checkbox"]').check()
+        cy.get('button').should('have.text', 'Accept our cookie policy')
+        cy.get('button a').should('be.visible').click()
+        cy.url().should('contain','/cookiePolicy.html')
+    });
 
+    it('Check visibility of error messages of the email', () => {
+        
+        cy.get('input[name="email"]').type('www');
+        cy.get('#emailAlert').should('contain', 'Invalid email address')
 
-            
-            })
-            it('Check visibility of error messages of the email', () => {
-            
-                cy.get('input[name="email"]').type('www');
-                cy.get('#emailAlert').should('contain', 'Invalid email address')
+        cy.get('input[name="email"]').clear();
+        cy.get('#emailAlert').should('contain', 'Email is required.')
+    });
 
-                cy.get('input[name="email"]').clear();
-                cy.get('#emailAlert').should('contain', 'Email is required.')
-
-            })
-
-            });
+});
                 
             
     //BONUS TASK: add functional tests for registration form 3

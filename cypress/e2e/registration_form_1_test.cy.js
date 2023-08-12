@@ -1,7 +1,7 @@
 // Before each test (it...) load .html page
 beforeEach(() => {
     cy.visit('cypress/fixtures/registration_form_1.html')
-})
+});
 
 
  describe('This is first test suite, Tatjana Geller', () => {
@@ -49,7 +49,7 @@ beforeEach(() => {
         cy.get('.submit_button').should('be.disabled')
         // Assert that password confirmation input fields has attribute 'title' with text stating 'Both passwords should match'
         cy.get('input[name="confirm"]').should('have.attr', 'title', 'Both passwords should match')
-    })
+    });
 
     it('User cannot submit data when username is absent', () => {
         cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
@@ -77,7 +77,7 @@ beforeEach(() => {
         // none = not visible; block = visible
         cy.get('#input_error_message').should('be.visible')
         cy.get('#input_error_message').should('have.css', 'display', 'block')
-    })
+    });
 
     /*
     Assignment 3: add the content to the following tests
@@ -96,7 +96,7 @@ beforeEach(() => {
 
         // Assert that success message is not visible
         cy.get('#success_message').should('not.be.visible')
-    })
+    });
 
     it('User cannot submit data when password and/or confirmation password is absent', () => {
         cy.get('#username').type('UserUser')
@@ -106,7 +106,7 @@ beforeEach(() => {
         cy.get('input[name="password"]').clear()
         cy.get('.submit_button').should('be.disabled')
         cy.get('#success_message').should('not.be.visible')
-    })
+    });
 
     it('User cannot add letters to phone number', () => {
         cy.get('[data-testid="phoneNumberTestId"]').should('have.attr', 'type', 'number')
@@ -121,5 +121,5 @@ beforeEach(() => {
         // Assert that success message is not visible
         cy.get('#success_message').should('not.be.visible')
         
-    })
+    });
 })
